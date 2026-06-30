@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IntervueX-AI — Rule-Based Interview Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">IntervueX<span>-AI</span></div>
+  <span class="nav-tag">RULE-BASED</span>
+</nav>
+
+<section class="hero">
+  <h1>Generate Your<br/><span class="grad">Personalized Interview</span></h1>
+  <p>Enter your name, target company, and role — our rules engine maps your profile to the right topics, difficulty, and question mix instantly.</p>
+</section>
+
+<div class="form-wrap">
+  <div class="card">
+    {% if errors %}
+    <div class="error-box">
+      <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+
+    <form id="interview-form" method="POST" action="/generate" autocomplete="off">
+
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Vibusha" required
+               value="{{ prev.name if prev else '' }}"/>
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company Name</label>
+        <input type="text" id="company" name="company" placeholder="e.g. Google DeepMind" required
+               value="{{ prev.company if prev else '' }}"/>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Target Role</label>
+        <input type="text" id="role" name="role" placeholder="e.g. Gen AI Engineer, ML Research Intern" required
+               value="{{ prev.role if prev else '' }}"/>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Experience Level</label>
+        <select id="experience" name="experience">
+          {% for value, label in experience_options %}
+          <option value="{{ value }}" {% if prev and prev.experience == value %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        ⚡ Generate My Interview
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feature">🎯 <span>Role-aware</span> topic mapping</div>
+  <div class="feature">⚖️ <span>Difficulty</span> calibrated to experience</div>
+  <div class="feature">📋 <span>114+</span> curated questions</div>
+  <div class="feature">🖨️ <span>Print-ready</span> output</div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
