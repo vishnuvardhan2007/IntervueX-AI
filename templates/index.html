@@ -8,66 +8,224 @@
 </head>
 <body>
 
+<!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
 <nav class="navbar">
   <div class="logo">IntervueX<span>-AI</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#generate" class="nav-cta">Generate ⚡</a></li>
+  </ul>
   <span class="nav-tag">RULE-BASED</span>
 </nav>
 
-<section class="hero">
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-badge">✦ No LLM · No API · Instant</div>
   <h1>Generate Your<br/><span class="grad">Personalized Interview</span></h1>
-  <p>Enter your name, target company, and role — our rules engine maps your profile to the right topics, difficulty, and question mix instantly.</p>
+  <p>Enter your name, target company, and role — our rules engine maps your profile to the right topics, difficulty mix, and 8–12 tailored questions in seconds.</p>
+  <div class="hero-ctas">
+    <a href="#generate" class="btn btn-primary" style="width:auto; padding:0.85rem 2rem; text-decoration:none;">⚡ Generate Interview</a>
+    <a href="#how-it-works" class="btn btn-ghost" style="width:auto; padding:0.85rem 2rem; text-decoration:none;">See How It Works →</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat"><span class="hnum">114+</span><span class="hlbl">Questions</span></div>
+    <div class="hstat-divider"></div>
+    <div class="hstat"><span class="hnum">16</span><span class="hlbl">Roles</span></div>
+    <div class="hstat-divider"></div>
+    <div class="hstat"><span class="hnum">8</span><span class="hlbl">Topics</span></div>
+    <div class="hstat-divider"></div>
+    <div class="hstat"><span class="hnum">0ms</span><span class="hlbl">API Wait</span></div>
+  </div>
 </section>
 
-<div class="form-wrap">
-  <div class="card">
-    {% if errors %}
-    <div class="error-box">
-      <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+<!-- ═══════════════════════════ FEATURES ═══════════════════════════ -->
+<section class="page-section" id="features">
+  <div class="section-label">Why IntervueX-AI</div>
+  <h2 class="section-title">Everything you need to<br/><span class="grad">ace your AI interview</span></h2>
+  <p class="section-sub">A fully deterministic, rule-based engine — no black-box AI, no surprises.</p>
+
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <h3>Role-Aware Mapping</h3>
+      <p>Automatically normalizes your role title and maps it to weighted topic categories — Gen AI Engineer gets 40% Gen AI questions, Data Scientist gets 35% ML, and so on.</p>
     </div>
-    {% endif %}
-
-    <form id="interview-form" method="POST" action="/generate" autocomplete="off">
-
-      <div class="form-group">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" placeholder="e.g. Vibusha" required
-               value="{{ prev.name if prev else '' }}"/>
-      </div>
-
-      <div class="form-group">
-        <label for="company">Company Name</label>
-        <input type="text" id="company" name="company" placeholder="e.g. Google DeepMind" required
-               value="{{ prev.company if prev else '' }}"/>
-      </div>
-
-      <div class="form-group">
-        <label for="role">Target Role</label>
-        <input type="text" id="role" name="role" placeholder="e.g. Gen AI Engineer, ML Research Intern" required
-               value="{{ prev.role if prev else '' }}"/>
-      </div>
-
-      <div class="form-group">
-        <label for="experience">Experience Level</label>
-        <select id="experience" name="experience">
-          {% for value, label in experience_options %}
-          <option value="{{ value }}" {% if prev and prev.experience == value %}selected{% endif %}>{{ label }}</option>
-          {% endfor %}
-        </select>
-      </div>
-
-      <button type="submit" class="btn btn-primary">
-        ⚡ Generate My Interview
-      </button>
-    </form>
+    <div class="feat-card">
+      <div class="feat-icon">⚖️</div>
+      <h3>Smart Difficulty</h3>
+      <p>Experience level directly controls the easy / medium / hard ratio. Freshers get a confidence-building mix; senior candidates face 70% hard questions.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <h3>114+ Curated Questions</h3>
+      <p>Hand-picked questions spanning Gen AI, Machine Learning, Python, NLP, Deep Learning, System Design, Statistics, and Behavioral — three difficulty tiers each.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💡</div>
+      <h3>Follow-Up Hints</h3>
+      <p>Every question ships with an interviewer-style follow-up to deepen your preparation. Toggle them on screen or print with all hints visible.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <h3>Zero API Calls</h3>
+      <p>Fully rule-based — no LLM, no external API, no latency, no cost. The engine runs in pure Python and produces consistent, reproducible results every time.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🖨️</div>
+      <h3>Print-Ready Output</h3>
+      <p>Clean, formatted output organized by topic with difficulty badges. Print as a PDF, study on screen, or share it with your mock interviewer.</p>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="features">
-  <div class="feature">🎯 <span>Role-aware</span> topic mapping</div>
-  <div class="feature">⚖️ <span>Difficulty</span> calibrated to experience</div>
-  <div class="feature">📋 <span>114+</span> curated questions</div>
-  <div class="feature">🖨️ <span>Print-ready</span> output</div>
-</div>
+<!-- ═══════════════════════════ HOW IT WORKS ═══════════════════════════ -->
+<section class="page-section" id="how-it-works">
+  <div class="section-label">The Process</div>
+  <h2 class="section-title">How IntervueX-AI<br/><span class="grad">works in 4 steps</span></h2>
+  <p class="section-sub">A transparent, deterministic pipeline from your profile to a ready-to-use interview sheet.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h3>Enter Your Details</h3>
+        <p>Provide your name, the target company, your role (e.g. "Gen AI Engineer"), and your experience level. That's all the engine needs.</p>
+      </div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h3>Rules Engine Fires</h3>
+        <p>Your role is normalized and fuzzy-matched to one of 16 known role profiles. Each profile carries a weighted list of topics and a difficulty distribution.</p>
+      </div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h3>Questions Selected</h3>
+        <p>Questions are drawn from a 114-item bank, topic by topic, respecting weighted counts and difficulty ratios — no duplicates, no gaps, always at least one per topic.</p>
+      </div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <h3>Your Interview is Ready</h3>
+        <p>Browse questions by topic, reveal follow-up hints, see exactly which rules fired, and print your personalized question set instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ GENERATE FORM ═══════════════════════════ -->
+<section class="page-section generate-section" id="generate">
+  <div class="section-label">Get Started</div>
+  <h2 class="section-title">Generate Your<br/><span class="grad">Interview Now</span></h2>
+  <p class="section-sub">Fill in the details below and your tailored interview question sheet will appear instantly.</p>
+
+  <div class="form-wrap">
+    <div class="card">
+      {% if errors %}
+      <div class="error-box">
+        <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+
+      <form id="interview-form" method="POST" action="/generate" autocomplete="off">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="e.g. Vishnu Vardhan" required
+                   value="{{ prev.name if prev else '' }}"/>
+          </div>
+          <div class="form-group">
+            <label for="company">Company Name</label>
+            <input type="text" id="company" name="company" placeholder="e.g. Google DeepMind" required
+                   value="{{ prev.company if prev else '' }}"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="role">Target Role</label>
+            <input type="text" id="role" name="role" placeholder="e.g. Gen AI Engineer" required
+                   value="{{ prev.role if prev else '' }}"/>
+          </div>
+          <div class="form-group">
+            <label for="experience">Experience Level</label>
+            <select id="experience" name="experience">
+              {% for value, label in experience_options %}
+              <option value="{{ value }}" {% if prev and prev.experience == value %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          ⚡ Generate My Interview
+        </button>
+      </form>
+    </div>
+
+    <p class="form-note">
+      Supported roles include Gen AI Engineer, ML Engineer, Data Scientist, NLP Engineer, MLOps Engineer, and more.
+      Unrecognized roles are fuzzy-matched to the closest profile.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo" style="font-size:1.5rem;">IntervueX<span>-AI</span></div>
+      <p>Ace your next AI interview.<br/>Rule-based · Open source · No API required.</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#generate">Generate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Topics Covered</h4>
+        <ul>
+          <li>Gen AI &amp; LLMs</li>
+          <li>Machine Learning</li>
+          <li>Python &amp; Coding</li>
+          <li>NLP &amp; Deep Learning</li>
+          <li>System Design</li>
+          <li>Behavioral</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Built With</h4>
+        <ul>
+          <li>Flask (Python)</li>
+          <li>Rule-Based Engine</li>
+          <li>114 Question Bank</li>
+          <li>16 Role Profiles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 IntervueX-AI · Built for Gen AI Internship</span>
+    <span>114 questions · 16 roles · 8 topics</span>
+  </div>
+</footer>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
